@@ -1,6 +1,17 @@
 import { NextResponse } from 'next/server';
 import axios from 'axios';
 
+interface ApiError {
+    response?: {
+        data?: {
+            message?: string;
+            file?: string;
+        };
+        status?: number;
+    };
+    message: string;
+}
+
 export async function GET(
     request: Request,
     { params }: { params: { filename: string } }
@@ -25,11 +36,11 @@ export async function GET(
                 { status: response.status }
             );
         }
-    } catch (error: any) {
-        console.error('Erro ao fazer download:', error.response?.data || error.message);
+    } catch (error: unknown) {
+        console.error('Erro ao fazer download:', (error as ApiError).response?.data || (error as ApiError).message);
         return NextResponse.json(
             { error: 'Falha ao fazer download do arquivo' },
-            { status: error.response?.status || 500 }
+            { status: (error as ApiError).response?.status || 500 }
         );
     }
 }

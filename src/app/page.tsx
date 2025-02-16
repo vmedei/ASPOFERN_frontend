@@ -4,6 +4,8 @@ import EnviarForm from './components/EnviarForm';
 import logo from '../../public/images/logo.png';
 import { Tabela } from './components/Tabela';
 import { DadosTabela } from './types/dados';
+import Image from 'next/image';
+
 export default function Home() {
     const [tableData, setTableData] = useState<DadosTabela[]>([]);
     const handleDataReceived = (data: DadosTabela[]) => {
@@ -13,7 +15,7 @@ export default function Home() {
     return (
         <main className="container mx-auto flex flex-col gap-4 pb-8">
             <div className="border-b flex items-center gap-4 p-4">
-                <img src={logo.src} alt="Logo" width={50} height={50} />
+                <Image src={logo.src} alt="Logo" width={50} height={50} />
                 <h1 className="text-3xl font-bold">Aspofern Data Sync</h1>
             </div>
             <div className='flex flex-col gap-4'>

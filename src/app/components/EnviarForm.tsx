@@ -5,9 +5,21 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Download } from "lucide-react";
+import { DadosTabela } from '../types/dados';
 
 interface PropsEnviarForm {
-	aoReceberDados: (dados: any) => void;
+	aoReceberDados: (dados: DadosTabela[]) => void;
+}
+
+interface ApiError {
+    response?: {
+        data?: {
+            message?: string;
+            file?: string;
+        };
+        status?: number;
+    };
+    message: string;
 }
 
 const camposArquivo = [
@@ -63,10 +75,10 @@ const EnviarForm: React.FC<PropsEnviarForm> = ({ aoReceberDados }) => {
 					variant: "destructive",
 				});
 			}
-		} catch (erro: any) {
+		} catch (erro: unknown) {
 			console.error('Erro detalhado:', erro);
-			const errorResponse = erro.response?.data;
-			const errorMessage = errorResponse?.message || erro.message || "Erro ao enviar arquivos.";
+			const errorResponse = (erro as ApiError).response?.data;
+			const errorMessage = errorResponse?.message || (erro as ApiError).message || "Erro ao enviar arquivos.";
 			const errorFile = errorResponse?.file || "Desconhecido";
 			
 			toast({
@@ -94,10 +106,12 @@ const EnviarForm: React.FC<PropsEnviarForm> = ({ aoReceberDados }) => {
 			document.body.appendChild(link);
 			link.click();
 			link.remove();
-		} catch (error) {
+		} catch (error: unknown) {
+			const errorResponse = (error as ApiError).response?.data;
+			const errorMessage = errorResponse?.message || (error as ApiError).message || "Erro ao fazer download do arquivo.";
 			toast({
 				title: "Erro!",
-				description: "Erro ao fazer download do arquivo.",
+				description: errorMessage,
 				variant: "destructive",
 			});
 		}
