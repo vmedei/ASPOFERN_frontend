@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Download } from "lucide-react";
 import { DadosTabela } from '../types/dados';
-import { Button, Input, Label } from "@/app/components/ui" 
+import { Button, Input, Label } from "./ui" 
 import { useToast } from '../hooks/use-toast';
 
 interface PropsEnviarForm {

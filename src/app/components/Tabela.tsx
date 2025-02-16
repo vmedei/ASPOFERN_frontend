@@ -11,7 +11,7 @@ import {
 import { useState } from 'react';
 import { ArrowUpDown, ChevronDown, ChevronUp } from "lucide-react";
 import { DadosTabela } from '../types/dados';
-import { Button, Input } from "@/app/components/ui"
+import { Button, Input } from "./ui"
 interface TabelaProps {
     data: DadosTabela[];
 }
