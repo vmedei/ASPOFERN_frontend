@@ -51,7 +51,7 @@ const EnviarForm: React.FC<PropsEnviarForm> = ({ aoReceberDados }) => {
 
 		try {
 			console.log("Iniciando envio dos arquivos...");
-			const resposta = await axios.post('/api/upload', dadosFormulario, {
+			const resposta = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/uploadfiles`, dadosFormulario, {
 				headers: { 'Content-Type': 'multipart/form-data' },
 			});
 
@@ -95,11 +95,11 @@ const EnviarForm: React.FC<PropsEnviarForm> = ({ aoReceberDados }) => {
 		if (!filename) return;
 		
 		try {
-			const response = await axios.get(`/api/download/${filename}`, {
+			const resposta = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/download/${filename}`, {
 				responseType: 'blob'
 			});
 			
-			const url = window.URL.createObjectURL(new Blob([response.data]));
+			const url = window.URL.createObjectURL(new Blob([resposta.data]));
 			const link = document.createElement('a');
 			link.href = url;
 			link.setAttribute('download', filename);
