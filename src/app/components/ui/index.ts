@@ -1,6 +1,5 @@
 export * from './alert'
 export * from './button'
-export * from './collapsible'
 export * from './form'
 export * from './input'
 export * from './label'
