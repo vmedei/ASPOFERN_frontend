@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { useToast } from "@/hooks/use-toast";
 import { Download } from "lucide-react";
 import { DadosTabela } from '../types/dados';
+import { Button, Input, Label } from "@/app/components/ui" 
+import { useToast } from '../hooks/use-toast';
 
 interface PropsEnviarForm {
 	aoReceberDados: (dados: DadosTabela[]) => void;

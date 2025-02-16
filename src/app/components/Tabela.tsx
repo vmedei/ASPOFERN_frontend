@@ -8,12 +8,10 @@ import {
     SortingState,
     createColumnHelper
 } from '@tanstack/react-table';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import { ArrowUpDown, ChevronDown, ChevronUp } from "lucide-react";
 import { DadosTabela } from '../types/dados';
-
+import { Button, Input } from "@/app/components/ui"
 interface TabelaProps {
     data: DadosTabela[];
 }
